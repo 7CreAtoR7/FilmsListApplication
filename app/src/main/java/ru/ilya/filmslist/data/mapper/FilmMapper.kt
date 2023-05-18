@@ -5,8 +5,9 @@ import ru.ilya.filmslist.data.network.DetailedFilmDTO
 import ru.ilya.filmslist.data.network.FilmItemDTO
 import ru.ilya.filmslist.domain.models.DetailedFilmItem
 import ru.ilya.filmslist.domain.models.FilmItem
+import javax.inject.Inject
 
-class FilmMapper {
+class FilmMapper @Inject constructor() {
 
     private fun mapFilmItemDTOToFilmItem(filmItemDTO: FilmItemDTO): FilmItem =
         FilmItem(

@@ -9,10 +9,13 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import ru.ilya.filmslist.R
 import ru.ilya.filmslist.databinding.ActivityMainBinding
+import ru.ilya.filmslist.presentation.FilmApplication
+import ru.ilya.filmslist.presentation.ViewModelFactory
 import ru.ilya.filmslist.presentation.adapter.FilmsAdapter
 import ru.ilya.filmslist.presentation.ui.detailedScreen.DetailedFilmActivity
 import ru.ilya.filmslist.presentation.ui.detailedScreen.DetailedFragment
 import ru.ilya.filmslist.presentation.ui.favouriteScreen.FavouriteActivity
+import javax.inject.Inject
 
 class MainActivity : AppCompatActivity() {
 
@@ -20,13 +23,22 @@ class MainActivity : AppCompatActivity() {
     private lateinit var filmsAdapter: FilmsAdapter
     private lateinit var viewModel: MainViewModel
 
+    @Inject
+    lateinit var viewModelFactory: ViewModelFactory
+
+    private val component by lazy {
+        (application as FilmApplication).component
+    }
+
     override fun onCreate(savedInstanceState: Bundle?) {
+        component.inject(this)
+
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
         supportActionBar?.hide()
-        viewModel = ViewModelProvider(this)[MainViewModel::class.java]
+        viewModel = ViewModelProvider(this, viewModelFactory)[MainViewModel::class.java]
 
         setupRecyclerView()
         initObservers()

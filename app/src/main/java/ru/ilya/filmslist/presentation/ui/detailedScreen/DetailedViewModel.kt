@@ -1,25 +1,18 @@
 package ru.ilya.filmslist.presentation.ui.detailedScreen
 
-import android.app.Application
-import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import kotlinx.coroutines.launch
-import ru.ilya.filmslist.data.network.ApiFactory
-import ru.ilya.filmslist.data.repository.FilmRepositoryImpl
 import ru.ilya.filmslist.domain.models.DetailedFilmItem
 import ru.ilya.filmslist.domain.models.ResponseState
 import ru.ilya.filmslist.domain.usecases.apiUseCases.GetDetailInfoFromApiUseCase
+import javax.inject.Inject
 
-class DetailedViewModel(
-    application: Application
-) : AndroidViewModel(application) {
-
-    private val repository =
-        FilmRepositoryImpl(application = application, ApiFactory.getApiService())
-
-    private val getDetailInfoFromApiUseCase = GetDetailInfoFromApiUseCase(repository)
+class DetailedViewModel @Inject constructor(
+    private val getDetailInfoFromApiUseCase: GetDetailInfoFromApiUseCase
+) : ViewModel() {
 
     private val _stateDetailFilm = MutableLiveData<DetailedFilmState>()
     val stateDetailFilm: LiveData<DetailedFilmState> = _stateDetailFilm

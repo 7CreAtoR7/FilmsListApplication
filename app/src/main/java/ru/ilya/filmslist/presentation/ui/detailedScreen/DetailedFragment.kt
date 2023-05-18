@@ -1,5 +1,6 @@
 package ru.ilya.filmslist.presentation.ui.detailedScreen
 
+import android.content.Context
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -12,6 +13,9 @@ import com.bumptech.glide.Glide
 import ru.ilya.filmslist.R
 import ru.ilya.filmslist.databinding.DetailedFragmentBinding
 import ru.ilya.filmslist.domain.models.DetailedFilmItem
+import ru.ilya.filmslist.presentation.FilmApplication
+import ru.ilya.filmslist.presentation.ViewModelFactory
+import javax.inject.Inject
 
 class DetailedFragment : Fragment() {
 
@@ -22,11 +26,22 @@ class DetailedFragment : Fragment() {
     private var filmItemId: Long = UNKNOWN
     private lateinit var viewModel: DetailedViewModel
 
+    @Inject
+    lateinit var viewModelFactory: ViewModelFactory
+
+    private val component by lazy {
+        (requireActivity().application as FilmApplication).component
+    }
+
+    override fun onAttach(context: Context) {
+        component.inject(this)
+        super.onAttach(context)
+    }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         parseParams()
-        viewModel = ViewModelProvider(this)[DetailedViewModel::class.java]
-    }
+     }
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -39,6 +54,7 @@ class DetailedFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        viewModel = ViewModelProvider(this, viewModelFactory)[DetailedViewModel::class.java]
         initClickListeners()
         initObservers()
         getDetailFilm()
@@ -86,6 +102,9 @@ class DetailedFragment : Fragment() {
     }
 
     private fun setupErrorPicture() {
+        binding.genresLabel.text = ""
+        binding.countriesLabel.text = ""
+
         binding.moviePoster.setImageDrawable(
             ResourcesCompat.getDrawable(
                 resources,

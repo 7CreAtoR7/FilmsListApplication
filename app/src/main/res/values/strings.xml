@@ -4,4 +4,6 @@
     <string name="favourites">Избранное</string>
     <string name="movie_title">Название фильма</string>
     <string name="genre_year">Жанр и год выпуска</string>
+    <string name="genre_label">Жанры: </string>
+    <string name="countries_label">Страны: </string>
 </resources>
