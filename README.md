@@ -1,5 +1,5 @@
 # Android приложение Films List
-Это android-приложение со списком фильмов и их описанием.
+Это android-приложение со списком фильмов и их описанием. Разработано по принципу **Clean Architecture** с применением паттерна презентационного слоя **MVVM**
 
 В роли источника данных выступает неофициальный API кинопоиска: `https://kinopoiskapiunofficial.tech`
 
@@ -26,3 +26,9 @@
 <img src="https://raw.githubusercontent.com/7CreAtoR7/FilmsListApplication/master/images/favourite_films.png">
 <br />
 Имеется возможность добавлять и просматривать фильмы в избранном в оффлайн режиме
+
+Используемый стек технологий:
+- `Coroutines`
+- `Retrofit2 + Okhttp3`
+- `Room db`
+- `Dagger2`
