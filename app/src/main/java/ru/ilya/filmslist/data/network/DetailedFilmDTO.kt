@@ -7,7 +7,7 @@ import ru.ilya.filmslist.domain.models.Genre
 data class DetailedFilmDTO(
 
     @SerializedName("kinopoiskId")
-    val kinopoiskID: Long? = null,
+    val id: Long? = null,
 
     @SerializedName("nameRu")
     val nameRu: String? = null,
@@ -26,6 +26,4 @@ data class DetailedFilmDTO(
 
     @SerializedName("genres")
     val genres: List<Genre>? = null,
-
-
-    )
+)

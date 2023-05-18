@@ -12,19 +12,16 @@ import ru.ilya.filmslist.domain.models.Genre
 data class FilmItemDBModel(
 
     @PrimaryKey
-    private val id: Long,
-
-    private val name: String,
-
-    private val year: String,
+    val id: Long,
+    val name: String,
+    val year: String,
 
     @TypeConverters(ConverterCountry::class)
     val countries: List<Country>? = emptyList(),
 
     @TypeConverters(ConverterGenre::class)
-    private val genres: List<Genre>? = emptyList(),
+    val genres: List<Genre>? = emptyList(),
 
-    private val posterUrl: String,
-
-    private val isFavourite: Boolean = false
+    val posterUrl: String,
+    val is_favourite: Boolean = false
 )

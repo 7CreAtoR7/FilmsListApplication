@@ -1,14 +1,15 @@
 package ru.ilya.filmslist.data.network
 
+import okhttp3.OkHttpClient
+import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
-import retrofit2.adapter.rxjava3.RxJava3CallAdapterFactory
 import retrofit2.converter.gson.GsonConverterFactory
-import retrofit2.create
+import ru.ilya.filmslist.util.Constants
 
-class ApiFactory() {
+
+class ApiFactory {
 
     companion object {
-        private const val BASE_URL = "https://kinopoiskapiunofficial.tech/"
         private var INSTANCE: ApiService? = null
         private val LOCK = Any()
 
@@ -21,14 +22,22 @@ class ApiFactory() {
                 INSTANCE?.let {
                     return it
                 }
-                val retrofit = Retrofit.Builder()
-                    .baseUrl(BASE_URL)
-                    .addConverterFactory(GsonConverterFactory.create())
-                    .addCallAdapterFactory(RxJava3CallAdapterFactory.create())
+
+                val interceptor = HttpLoggingInterceptor()
+                interceptor.level = HttpLoggingInterceptor.Level.BODY
+
+                val client = OkHttpClient.Builder()
+                    .addInterceptor(interceptor)
                     .build()
 
-                INSTANCE = retrofit.create()
-                return retrofit.create()
+                val retrofit = Retrofit.Builder()
+                    .baseUrl(Constants.BASE_URL)
+                    .client(client)
+                    .addConverterFactory(GsonConverterFactory.create())
+                    .build()
+
+                INSTANCE = retrofit.create(ApiService::class.java)
+                return retrofit.create(ApiService::class.java)
             }
         }
     }

@@ -1,4 +1,4 @@
-package ru.ilya.filmslist.domain.usecases
+package ru.ilya.filmslist.domain.usecases.dbUseCases
 
 import androidx.lifecycle.LiveData
 import ru.ilya.filmslist.domain.models.FilmItem
@@ -11,5 +11,4 @@ class GetFavouriteFilmsFromDbUseCase(
     fun getFavouriteFilmsFromDb(): LiveData<List<FilmItem>> {
         return repository.getFavouriteFilmsFromDb()
     }
-
 }

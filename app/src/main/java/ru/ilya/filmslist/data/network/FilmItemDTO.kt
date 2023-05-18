@@ -7,10 +7,10 @@ import ru.ilya.filmslist.domain.models.Genre
 data class FilmItemDTO(
 
     @SerializedName("filmId")
-    val filmID: Long? = null,
+    val id: Long? = null,
 
     @SerializedName("nameRu")
-    val nameRu: String? = null,
+    val name: String? = null,
 
     @SerializedName("year")
     val year: String? = null,
@@ -22,8 +22,8 @@ data class FilmItemDTO(
     val genres: List<Genre>? = null,
 
     @SerializedName("posterUrl")
-    val posterURL: String? = null,
+    val posterUrl: String? = null,
 
-    val favourite: Boolean = false
+    val isFavourite: Boolean = false
 
 )
