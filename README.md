@@ -23,6 +23,6 @@
 <br />
 Фильмы, добавленные в избранное, будут выделяться в разделе популярных фильмов
 
-<img src="https://raw.githubusercontent.com/7CreAtoR7/FilmsListApplication/readme/images/favourite_films.png" width="300" height="400">
+<img src="https://raw.githubusercontent.com/7CreAtoR7/FilmsListApplication/readme/images/favourite_films.png">
 <br />
 Имеется возможность добавлять и просматривать фильмы в избранном в оффлайн режиме
