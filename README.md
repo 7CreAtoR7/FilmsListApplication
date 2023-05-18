@@ -5,7 +5,7 @@
 
 На главном экране отображается список популярных фильмов
 
-<img src="https://raw.githubusercontent.com/7CreAtoR7/FilmsListApplication/master/images/popular_screen.png">
+<img src="https://raw.githubusercontent.com/7CreAtoR7/FilmsListApplication/master/images/popular_films_screen.png">
 <br />
 При клике на карточку фильма открывается экран с детальной информацией о фильме
 
