@@ -10,13 +10,13 @@ interface FilmsDao {
     @Query("SELECT * FROM films")
     fun getAllFilmsListFromDb(): LiveData<List<FilmItemDBModel>>
 
-    @Insert(onConflict = OnConflictStrategy.REPLACE)
+    @Insert(onConflict = OnConflictStrategy.IGNORE)
     suspend fun addFilmsListToDb(filmsList: List<FilmItemDBModel>)
 
-    @Query("SELECT * FROM films WHERE favourite=1")
+    @Query("SELECT * FROM films WHERE is_favourite=1")
     fun getFavouriteFilmsFromDb(): LiveData<List<FilmItemDBModel>>
 
-    @Query("UPDATE film_item SET isLove = :isFavourite WHERE id = :id")
-    suspend fun updateFilmFavouriteStatus(filmItemDBModel: FilmItemDBModel)
+    @Query("UPDATE films SET is_favourite = :isFavourite WHERE id = :id")
+    suspend fun updateFilmFavouriteStatus(isFavourite: Boolean, id: Long)
 
 }

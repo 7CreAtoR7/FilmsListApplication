@@ -12,10 +12,10 @@ import ru.ilya.filmslist.data.database.entities.FilmItemDBModel
 
 @Database(
     entities = [FilmItemDBModel::class],
-    version = 1
+    version = 1,
+    exportSchema = false
 )
 @TypeConverters(ConverterCountry::class, ConverterGenre::class)
-// преобразование списка с годом произвоства и списка стан
 abstract class FilmsDatabase : RoomDatabase() {
 
     abstract fun filmsDao(): FilmsDao

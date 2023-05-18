@@ -1,3 +1,7 @@
 <resources>
     <string name="app_name">Films List</string>
+    <string name="popular">Популярные</string>
+    <string name="favourites">Избранное</string>
+    <string name="movie_title">Название фильма</string>
+    <string name="genre_year">Жанр и год выпуска</string>
 </resources>
