@@ -15,7 +15,7 @@
 
 При смене ориентации устройства список фильмов занимает 50% экрана, во второй половине отображается описание фильма
 
-<img src="https://raw.githubusercontent.com/7CreAtoR7/FilmsListApplication/readme/images/landscape_detail.png" width="50%" height="40%">
+<img src="https://raw.githubusercontent.com/7CreAtoR7/FilmsListApplication/readme/images/landscape_detail.png">
 <br />
 При длительном клике на карточку, фильм добавляется в избранное
 
