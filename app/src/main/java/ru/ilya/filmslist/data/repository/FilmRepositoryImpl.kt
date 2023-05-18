@@ -1,25 +1,23 @@
 package ru.ilya.filmslist.data.repository
 
-import android.app.Application
 import androidx.lifecycle.LiveData
-import androidx.lifecycle.Transformations
-import ru.ilya.filmslist.data.database.FilmsDatabase
+import androidx.lifecycle.map
+import ru.ilya.filmslist.data.database.FilmsDao
 import ru.ilya.filmslist.data.mapper.FilmMapper
 import ru.ilya.filmslist.data.network.ApiService
 import ru.ilya.filmslist.domain.models.DetailedFilmItem
 import ru.ilya.filmslist.domain.models.FilmItem
 import ru.ilya.filmslist.domain.repository.FilmRepository
+import javax.inject.Inject
 
-class FilmRepositoryImpl(
-    application: Application,
+class FilmRepositoryImpl @Inject constructor(
+    private val filmsListDao: FilmsDao,
+    private val mapper: FilmMapper,
     private val api: ApiService
 ) : FilmRepository {
 
-    private val filmsListDao = FilmsDatabase.getInstance(application).filmsDao()
-    private val mapper = FilmMapper()
-
     override fun getAllFilmsListFromDb(): LiveData<List<FilmItem>> {
-        return Transformations.map(filmsListDao.getAllFilmsListFromDb()) {
+        return filmsListDao.getAllFilmsListFromDb().map {
             mapper.mapListFilmItemDBModelToListFilmItem(it)
         }
     }
@@ -29,7 +27,7 @@ class FilmRepositoryImpl(
     }
 
     override fun getFavouriteFilmsFromDb(): LiveData<List<FilmItem>> {
-        return Transformations.map(filmsListDao.getFavouriteFilmsFromDb()) {
+        return filmsListDao.getFavouriteFilmsFromDb().map {
             mapper.mapListFilmItemDBModelToListFilmItem(it)
         }
     }

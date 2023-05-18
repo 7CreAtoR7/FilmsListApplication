@@ -1,19 +1,12 @@
 package ru.ilya.filmslist.presentation.ui.favouriteScreen
 
-import android.app.Application
-import androidx.lifecycle.AndroidViewModel
-import ru.ilya.filmslist.data.network.ApiFactory
-import ru.ilya.filmslist.data.repository.FilmRepositoryImpl
+import androidx.lifecycle.ViewModel
 import ru.ilya.filmslist.domain.usecases.dbUseCases.GetFavouriteFilmsFromDbUseCase
+import javax.inject.Inject
 
-class FavouriteViewModel(
-    application: Application
-) : AndroidViewModel(application) {
-
-    private val repository =
-        FilmRepositoryImpl(application = application, ApiFactory.getApiService())
-
-    private val getFavouriteFilmsFromDbUseCase = GetFavouriteFilmsFromDbUseCase(repository)
+class FavouriteViewModel @Inject constructor(
+    private val getFavouriteFilmsFromDbUseCase: GetFavouriteFilmsFromDbUseCase
+) : ViewModel() {
 
     val favouriteFilmsList = getFavouriteFilmsFromDbUseCase.getFavouriteFilmsFromDb()
 

@@ -1,29 +1,22 @@
 package ru.ilya.filmslist.presentation.ui.filmsScreen
 
-import android.app.Application
-import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import kotlinx.coroutines.launch
-import ru.ilya.filmslist.data.network.ApiFactory
-import ru.ilya.filmslist.data.repository.FilmRepositoryImpl
 import ru.ilya.filmslist.domain.models.FilmItem
 import ru.ilya.filmslist.domain.models.ResponseState
 import ru.ilya.filmslist.domain.usecases.apiUseCases.GetTopFilmsFromApiUseCase
 import ru.ilya.filmslist.domain.usecases.dbUseCases.GetAllFilmsListFromDbUseCase
 import ru.ilya.filmslist.domain.usecases.dbUseCases.UpdateFilmFavouriteStatusUseCase
+import javax.inject.Inject
 
-class MainViewModel(
-    application: Application
-) : AndroidViewModel(application) {
-
-    private val repository =
-        FilmRepositoryImpl(application = application, ApiFactory.getApiService())
-
-    private val getTopFilmsFromApiUseCase = GetTopFilmsFromApiUseCase(repository)
-    private val updateFilmFavouriteStatusUseCase = UpdateFilmFavouriteStatusUseCase(repository)
-    private val getAllFilmsListFromDbUseCase = GetAllFilmsListFromDbUseCase(repository)
+class MainViewModel @Inject constructor(
+    private val getTopFilmsFromApiUseCase: GetTopFilmsFromApiUseCase,
+    private val updateFilmFavouriteStatusUseCase: UpdateFilmFavouriteStatusUseCase,
+    private val getAllFilmsListFromDbUseCase: GetAllFilmsListFromDbUseCase
+) : ViewModel() {
 
     val filmsList = getAllFilmsListFromDbUseCase.getAllFilmsListFromDb()
 

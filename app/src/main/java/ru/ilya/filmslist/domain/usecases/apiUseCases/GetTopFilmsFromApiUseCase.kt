@@ -5,8 +5,9 @@ import ru.ilya.filmslist.domain.models.FilmItem
 import ru.ilya.filmslist.domain.models.ResponseState
 import ru.ilya.filmslist.domain.repository.FilmRepository
 import java.io.IOException
+import javax.inject.Inject
 
-class GetTopFilmsFromApiUseCase(
+class GetTopFilmsFromApiUseCase @Inject constructor(
     private val filmRepository: FilmRepository
 ) {
     suspend operator fun invoke(
